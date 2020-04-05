@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- ******************** REGLA DE INICIO ************************* -->
+<category>
+	<pattern>Quiero jugar</pattern>
+	<template>
+		<condition name="jugando">
+			<li value="SI">
+				Ya estas jugando
+			</li>
+			<li>
+			    <think>
+			    	<set name="jugando">SI</set>
+			        <set name="lista_frutas"><readset>frutas</readset></set>
+			        <set var="cantidad"><srai>COUNT <get name="lista_frutas"/></srai></set>
+			        <set var="pos"><srai>RANDOM <get var="cantidad"/></srai></set>
+			        <set name="fruta">
+			            <srai>
+			                SELECTITEM <get var="pos"/> IN <get name="lista_frutas"/>
+			            </srai>
+			        </set>
+
+
+			    </think>
+			    Vale! Preguntame algo.
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>Piensa una fruta</pattern>
+	<template><srai>Quiero jugar</srai></template>
+</category>
+
+
+<!-- ******************** REGLA DE RENDICION ************************* -->
+<category>
+	<pattern>Dime la fruta</pattern>
+	<template>
+		<condition name="jugando">
+			<li value="SI">
+				La furta pensada era <get name="fruta"/>
+			</li>
+			<li>
+				Para ello habra que jugar
+			</li>
+		</condition>
+		<think> <set name="jugando">NO</set></think>
+	</template>
+</category>
+
+<category>
+	<pattern>Me rindo</pattern>
+	<template><srai>Dime la fruta</srai></template>
+</category>
+
+
+<!-- ******************** REGLA DE SOLUCION ************************* -->
+<category>
+	<pattern>es [la el] <set>frutas</set></pattern>
+	<template>
+		<think> 
+			<set var="correcto">
+				<srai>FINDITEM <star index="1"/> in <get name="fruta"/></srai>
+			</set>
+		</think>
+		<condition name="jugando">
+			<li value="SI">
+				<condition var="correcto">
+					<li value="1">
+						Siii, ole que ole has ganado
+						<think> <set name="jugando">NO</set></think>
+					</li>
+					<li value="0">
+						No, prueba suerte otra vez
+					</li>
+				</condition>
+			</li>
+			<li>
+				Para ello habra que jugar
+			</li>
+		</condition>
+		
+	</template>
+</category>
+
+<category>
+	<pattern>la fruta en la que estabas pensado es [la el] <set>frutas</set></pattern>
+	<template><srai>es la <star/></srai></template>
+</category>
+
+<category>
+	<pattern>es [la el] *</pattern>
+	<template>Eso no es una fruta valida</template>
+</category>
+
+<category>
+	<pattern>la fruta en la que estabas pensado es [la el] *</pattern>
+	<template><srai>es la <star/></srai></template>
+</category>
+
+
+
+
+<!-- ******************** PREGUNTA DE COLOR ************************* -->
+<category>
+	<pattern>es de color <set>colores</set> ^ </pattern>
+	<template>
+		<think>
+			<set var="color"><star index="1"/></set>
+		</think>
+
+		<condition var="color">
+	        <li value="rojo"> 
+	        	<map name="colorrojo"><get name="fruta"/></map>
+	    	</li>
+	        <li value="amarillo"> 
+	        	<map name="coloramarillo"><get name="fruta"/></map> 
+	        </li>
+	        <li value="verde"> 
+	        	<map name="colorverde"><get name="fruta"/></map> 
+	        </li>
+	        <li value="morado"> 
+	        	<map name="colormorado"><get name="fruta"/></map> 
+	        </li>
+	        <li value="marron"> 
+	        	<map name="colormarron"><get name="fruta"/></map>
+	        </li>
+	        <li value="naranja"> 
+	        	<map name="colornaranja"><get name="fruta"/></map> 
+	        </li>
+	    </condition>
+	</template>
+</category>
+
+<category>
+	<pattern>es de color * ^</pattern>
+	<template>
+		Ese color no es de una fruta
+	</template>
+</category>
+
+
+<!-- ******************** PREGUNTA DE SABOR ************************* -->
+<category>
+	<pattern>es de sabor <set>sabores</set> ^ </pattern>
+	<template>
+		<think>
+			<set var="sabor"><star index="1"/></set>
+		</think>
+
+		<condition var="sabor">
+	        <li value="acido"> 
+	        	<map name="saboracido"><get name="fruta"/></map>
+	    	</li>
+	        <li value="dulce"> 
+	        	<map name="sabordulce"><get name="fruta"/></map> 
+	        </li>
+	        <li value="neutro"> 
+	        	<map name="saborneutro"><get name="fruta"/></map> 
+	        </li>
+	        <li value="semiacido"> 
+	        	<map name="saborsemiacido"><get name="fruta"/></map> 
+	        </li>
+	    </condition>
+	</template>
+</category>
+
+<category>
+	<pattern>es de sabor * ^</pattern>
+	<template>
+		Ese sabor no es de una fruta
+	</template>
+</category>
+
+
+<!-- ******************** PREGUNTA DE TAMAÑO ************************* -->
+<category>
+	<pattern>es de tamanio <set>tamaños</set></pattern>
+	<template>
+		<think>
+			<set var="tamaño"><star index="1"/></set>
+		</think>
+
+		<condition var="tamaño">
+	        <li value="grande"> 
+	        	<map name="tamañogrande"><get name="fruta"/></map>
+	    	</li>
+	        <li value="mediano"> 
+	        	<map name="tamañomediano"><get name="fruta"/></map> 
+	        </li>
+	        <li value="pequenio"> 
+	        	<map name="tamañopequeño"><get name="fruta"/></map> 
+	        </li>
+	    </condition>
+	</template>
+</category>
+
+<category>
+	<pattern>es de tamanio *</pattern>
+	<template>
+		Ese tamaño no es de una fruta
+	</template>
+</category>
+
+
+<!-- ******************** PREGUNTA DE VITAMINA ************************* -->
+<category>
+	<pattern>[contiene tiene] ^ vitamina <set>vitaminas</set> ^ </pattern>
+	<template>
+		<think>
+			<set var="tipo"><star index="2"/></set>
+		</think>
+
+		<condition var="tipo">
+	        <li value="A"> 
+	        	<map name="vitaminaA"><get name="fruta"/></map>
+	    	</li>
+	        <li value="B"> 
+	        	<map name="vitaminaB"><get name="fruta"/></map> 
+	        </li>
+	        <li value="C"> 
+	        	<map name="vitaminaC"><get name="fruta"/></map> 
+	        </li>
+	    </condition>
+	</template>
+</category>
+
+<category>
+	<pattern>[contiene tiene] ^ vitamina * ^</pattern>
+	<template>
+		Ese tipo de vitamina no es de una fruta
+	</template>
+</category>
+
+</aiml>

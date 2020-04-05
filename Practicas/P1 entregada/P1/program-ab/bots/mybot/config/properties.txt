@@ -1,0 +1,9 @@
+url:http://www.alicebot.org
+name:Susana Oria
+email:myBot@gmail.com
+gender:male
+botmaster:Jose Antonio Padial Molina	
+organization:ugr
+version:0.0.4
+
+

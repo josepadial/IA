@@ -1,0 +1,16 @@
+﻿Fresa
+Manzana
+Naranja
+Kiwi
+Mandarina
+Pinia
+Mango
+Melocoton
+Higo
+Ciruela
+Pera
+Platano
+Coco
+Aguacate
+Nuez
+Cereza

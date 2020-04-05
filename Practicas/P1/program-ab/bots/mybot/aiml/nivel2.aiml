@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+
+<category>
+	<pattern>Pienso una fruta</pattern>
+	<template>
+		<think>
+			<set name="colMorado"/>
+			<set name="colNaranja"/>
+			<set name="tamPqn"/>
+		</think>
+		Es de color rojo?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>^ Es de color rojo</that>
+	<template>
+		Tiene mas colores?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Tiene mas colores</that>
+	<template>
+		<condition name="colNaranja">
+			<li value="Si">
+				La fruta en la que piensas es la Melocoton?
+			</li>
+			<li>
+				La fruta en la que piensas es la Manzana?
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Tiene mas colores</that>
+	<template>
+		<condition name="colNaranja">
+			<li value="Si">
+				Tiene Vitamina C?
+			</li>
+			<li>
+				Tiene Vitamina A?
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Tiene Vitamina A</that>
+	<template>
+		<condition name="colMorado">
+			<li value="Si">
+				La fruta en la que piensas es la Ciruela?
+			</li>
+			<li>
+				<condition name="tamPqn">
+					<li value="No">
+						La fruta en la que piensas es el Mango?
+					</li>
+					<li>
+						La fruta en la que piensas es la Cereza?
+					</li>
+				</condition>
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Tiene Vitamina A</that>
+	<template>
+		<condition name="colMorado">
+			<li value="Si">
+				La fruta en la que piensas es la Higo?
+			</li>
+			<li>
+				<condition name="tamPqn">
+					<li value="No">
+						La fruta en la que piensas es la Piña?
+					</li>
+					<li>
+						La fruta en la que piensas es la Fresa?
+					</li>
+				</condition>
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Tiene Vitamina C</that>
+	<template>
+		La fruta en la que piensas es la Naranja?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Tiene Vitamina C</that>
+	<template>
+		La fruta en la que piensas es la Mandarina?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>^ Es de color rojo</that>
+	<template>
+		Es de color marron?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de color marron</that>
+	<template>
+		Es de tamaño grande?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de tamaño grande</that>
+	<template>
+		<condition name="tamPqn">
+			<li value="No">
+				Tiene Vitamina A?
+			</li>
+			<li>
+				La fruta en la que piensas es el Coco?
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de tamaño grande</that>
+	<template>
+		<condition name="tamPqn">
+			<li value="No">
+				Es de sabor neutro?
+			</li>
+			<li>
+				La fruta en la que piensas es la Nuez?
+			</li>
+		</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de color marron</that>
+	<template>
+		Es de color morado?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de color morado</that>
+	<template>
+		<think>
+			<set name="colMorado">Si</set>
+		</think>
+		Tiene Vitamina A?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de color morado</that>
+	<template>
+		<think>
+			<set name="colMorado">No</set>
+		</think>
+		Es de color naranja?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de color naranja</that>
+	<template>
+		<think>
+			<set name="colNaranja">Si</set>
+		</think>
+		Tiene mas colores?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de color naranja</that>
+	<template>
+		<think>
+			<set name="colNaranja">No</set>
+		</think>
+		Es de tamaño pequeño?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de tamaño pequeño</that>
+	<template>
+		<think>
+			<set name="tamPqn">Si</set>
+		</think>
+		La fruta en la que piensas es el Kiwi?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de tamaño pequeño</that>
+	<template>
+		<think>
+			<set name="tamPqn">No</set>
+		</think>
+		Es de tamaño grande?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de sabor neutro</that>
+	<template>
+		La fruta en la que piensas es el Aguacate?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de sabor neutro</that>
+	<template>
+		Es de color verde?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>Es de color verde</that>
+	<template>
+		La fruta en la que piensas es la Pera?
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>Es de color verde</that>
+	<template>
+		La fruta en la que piensas es el Platano?
+	</template>
+</category>
+
+<category>
+	<pattern>Si</pattern>
+	<that>La fruta en la que piensas es *</that>
+	<template>
+		Ya sabia que no hay nadie mas inteligente que yo, jejejeje
+	</template>
+</category>
+
+<category>
+	<pattern>No</pattern>
+	<that>La fruta en la que piensas es *</that>
+	<template>
+		Se me tuvo que activar un flag por error, probemos otra vez <srai>Pienso una fruta</srai>
+	</template>
+</category>
+
+</aiml>

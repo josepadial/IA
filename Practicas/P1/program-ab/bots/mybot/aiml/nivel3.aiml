@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+	<pattern>Pienso una fruta nivel 3</pattern>
+	<template>
+		<think>
+			<set name="lista_frutas"><readset>frutas</readset></set>
+			<set name="lista_colores"><readset>colores</readset></set>
+			<set name="lista_vitaminas"><readset>vitaminas</readset></set>
+			<set name="lista_sabores"><readset>sabores</readset></set>
+			<set name="lista_tamanios"><readset>tamaños</readset></set>
+			<set name="lista_posibles">colores vitaminas sabores tamanios</set>
+		</think>
+			<srai>BUSCARCAT</srai>
+	</template>
+</category>
+
+<category>
+	<pattern>BUSCARCAT</pattern>
+	<template>
+		<think>
+			<set name="cantPos"><srai>COUNT <get name="lista_posibles"/></srai></set>
+			<set name="rand"><srai>RANDOM <get name="cantPos"/></srai></set>
+			<set name="catSelect"><srai>SELECTITEM <get name="rand"/> IN <get name="lista_posibles"/></srai></set>
+		</think>
+		<srai>ELEGIRCAT</srai>
+	</template>
+</category>
+
+<category>
+	<pattern>ELEGIRCAT</pattern>
+	<template>
+			<condition name="catSelect">
+				<li value="colores">
+					<think>
+						<set name="cantCol"><srai>COUNT <get name="lista_colores"/></srai></set>
+						<set name="randCol"><srai>RANDOM <get name="cantCol"/></srai></set>
+						<set name="colEle"><srai>SELECTITEM <get name="randCol"/> IN <get name="lista_colores"/></srai></set>
+					</think>
+					<srai>ES DE <get name="catSelect"/> <get name="colEle"/> </srai>
+				</li>
+				<li value="vitaminas">
+					<think>
+						<set name="cantVit"><srai>COUNT <get name="lista_vitaminas"/></srai></set>
+						<set name="randVit"><srai>RANDOM <get name="cantVit"/></srai></set>
+						<set name="vitEle"><srai>SELECTITEM <get name="randVit"/> IN <get name="lista_vitaminas"/></srai></set>
+					</think>
+					<srai>ES DE <get name="catSelect"/> <get name="vitEle"/> </srai>
+				</li>
+				<li value="sabores">
+					<think>
+						<set name="cantSab"><srai>COUNT <get name="lista_sabores"/></srai></set>
+						<set name="randSab"><srai>RANDOM <get name="cantSab"/></srai></set>
+						<set name="sabEle"><srai>SELECTITEM <get name="randSab"/> IN <get name="lista_sabores"/></srai></set>
+					</think>
+					<srai>ES DE <get name="catSelect"/> <get name="sabEle"/> </srai>
+				</li>
+				<li value="tamanios">
+					<think>
+						<set name="cantTam"><srai>COUNT <get name="lista_tamanios"/></srai></set>
+						<set name="randTam"><srai>RANDOM <get name="cantTam"/></srai></set>
+						<set name="tamEle"><srai>SELECTITEM <get name="randTam"/> IN <get name="lista_tamanios"/></srai></set>
+					</think>
+					<srai>ES DE <get name="catSelect"/> <get name="tamEle"/> </srai>
+				</li>
+			</condition>
+	</template>
+</category>
+
+<category>
+	<pattern>ES DE * *</pattern>
+	<template>
+			<condition name="cantPos">
+				<li value="0">
+					<srai>DIMELAFRUTA</srai>
+				</li>
+				<li value="1">
+					<condition name="catSelect">
+						<li value="colores">
+							<condition name="cantCol">
+								<li value="1">
+									<think>
+										<set name="topic">respuesta</set>
+									</think>
+									<srai>DIMELAFRUTA</srai>
+								</li>
+								<li>
+									<think>
+										<set name="topic">busca</set>
+									</think>
+									es de <star/> <star index="2"/>?
+								</li>
+							</condition>
+						</li>
+						<li value="vitaminas">
+							<condition name="cantCol">
+								<li value="1">
+									<think>
+										<set name="topic">respuesta</set>
+									</think>
+									<srai>DIMELAFRUTA</srai>
+								</li>
+								<li>
+									<think>
+										<set name="topic">busca</set>
+									</think>
+									es de <star/> <star index="2"/>?
+								</li>
+							</condition>
+						</li>
+						<li value="sabores">
+							<condition name="cantCol">
+								<li value="1">
+									<think>
+										<set name="topic">respuesta</set>
+									</think>
+									<srai>DIMELAFRUTA</srai>
+								</li>
+								<li>
+									<think>
+										<set name="topic">busca</set>
+									</think>
+									es de <star/> <star index="2"/>?
+								</li>
+							</condition>
+						</li>
+						<li value="tamanios">
+							<condition name="cantCol">
+								<li value="1">
+									<think>
+										<set name="topic">respuesta</set>
+									</think>
+									<srai>DIMELAFRUTA</srai>
+								</li>
+								<li>
+									<think>
+										<set name="topic">busca</set>
+									</think>
+									es de <star/> <star index="2"/>?
+								</li>
+							</condition>
+						</li>
+					</condition>
+				</li>
+				<li>
+					<think>
+						<set name="topic">busca</set>
+					</think>
+					<srai>DIMELAFRUTA</srai>
+					es de <star/> <star index="2"/>?
+				</li>
+			</condition>
+	</template>
+</category>
+
+<topic name="respuesta">
+
+<category>
+	<pattern>si</pattern>
+	<template>
+		<think>
+			<set name="topic">unknown</set>
+		</think>
+		Ya sabia que no hay nadie mas inteligente que yo, jejejeje
+	</template>
+</category>
+
+<category>
+	<pattern>no</pattern>
+	<template>
+		Cual habias pensado?
+	</template>
+</category>
+
+<category>
+	<pattern>*</pattern>
+	<template>
+		Dime si es o no la fruta
+	</template>
+</category>
+
+</topic>
+
+<category>
+	<pattern>*</pattern>
+	<that>Cual habias pensado ^</that>
+	<template>
+		<srai>EXPLIXAELNO <star/></srai>
+	</template>
+</category>
+
+<category>
+	<pattern>DIMELAFRUTA</pattern>
+	<template>
+			<get name="lista_frutas"/>
+			<get name="lista_colores"/>
+			<get name="lista_vitaminas"/>
+			<get name="lista_sabores"/>
+			<get name="lista_tamanios"/>
+			<get name="lista_posibles"/>
+	</template>
+</category>
+
+<category>
+	<pattern>EXPLIXAELNO *</pattern>
+	<template>
+
+	</template>
+</category>
+
+
+
+<topic name="busca">
+
+<category>
+	<pattern>si</pattern>
+	<template>
+			<srai>BORRATODOMENOS</srai>
+	</template>
+</category>
+
+<category>
+	<pattern>no</pattern>
+	<template>
+			<srai>BORRAUNO</srai>
+	</template>
+</category>
+
+<category>
+	<pattern>*</pattern>
+	<template>
+			Dime si o no
+	</template>
+</category>
+
+</topic>
+
+<category>
+	<pattern>BORRATODOMENOS</pattern>
+	<template>
+		<think>
+			<set name="topic">unknown</set>
+			<set name="lista_posibles"><srai>REMOVEITEM <get name="rand"/> IN <get name="lista_posibles"/></srai></set>
+			<condition name="catSelect">
+				<li value="colores">
+					<set name="lista_colores"><srai>SELECTITEM <get name="randCol"/> IN <get name="lista_colores"/></srai></set>
+				</li>
+				<li value="vitaminas">
+					<set name="lista_vitaminas"><srai>SELECTITEM <get name="randVit"/> IN <get name="lista_vitaminas"/></srai></set>
+				</li>
+				<li value="sabores">
+					<set name="lista_sabores"><srai>SELECTITEM <get name="randSab"/> IN <get name="lista_sabores"/></srai></set>
+				</li>
+				<li value="tamanios">
+					<set name="lista_tamanios"><srai>SELECTITEM <get name="randTam"/> IN <get name="lista_tamanios"/></srai></set>
+				</li>
+			</condition>
+		</think>
+		<srai>BUSCARCAT</srai>
+	</template>
+</category>
+
+<category>
+	<pattern>BORRAUNO</pattern>
+	<template>
+		<think>
+			<set name="topic">unknown</set>
+			<condition name="catSelect">
+				<li value="colores">
+					<set name="lista_colores"><srai>REMOVEITEM <get name="randCol"/> IN <get name="lista_colores"/></srai></set>
+				</li>
+				<li value="vitaminas">
+					<set name="lista_vitaminas"><srai>REMOVEITEM <get name="randVit"/> IN <get name="lista_vitaminas"/></srai></set>
+				</li>
+				<li value="sabores">
+					<set name="lista_sabores"><srai>REMOVEITEM <get name="randSab"/> IN <get name="lista_sabores"/></srai></set>
+				</li>
+				<li value="tamanios">
+					<set name="lista_tamanios"><srai>REMOVEITEM <get name="randTam"/> IN <get name="lista_tamanios"/></srai></set>
+				</li>
+			</condition>
+		</think>
+		<srai>BUSCARCAT</srai>
+	</template>
+</category>
+
+
+</aiml>

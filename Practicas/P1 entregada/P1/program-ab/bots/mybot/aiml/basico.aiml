@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- regla 1 -->
+<category>
+<pattern>Hola ^</pattern>
+<template>
+	<random>
+		<li>Hola, que tal?</li>
+		<li>Hola, como andas?</li>
+		<li>Hola, soy <bot name="name"/></li>
+	</random>
+</template>
+</category>
+
+<!-- regla 2 -->
+<category>
+<pattern>^ que tal ^</pattern>
+<template>Estoy genial!!!</template>
+</category>
+
+<!-- regla 3 -->
+<category>
+<pattern>^ y tu ^</pattern>
+<that>Hola+ ^</that>
+<template>Estoy genial!!!</template>
+</category>
+
+<!-- regla 4 -->
+<category>
+<pattern>^ bien ^</pattern>
+<that>Hola+ ^</that>
+<template>Pues me alegro</template>
+</category>
+
+<!-- regla 5 -->
+<category>
+<pattern>^ [mal regular] ^</pattern>
+<that>Hola+ ^</that>
+<template>Me pongo triste :'(</template>
+</category>
+
+<!-- regla 6 -->
+<category>
+<pattern>^ encantad+ ^</pattern>
+<that>^ susana oria ^</that>
+<template>
+	<random>
+		<li>Igualmente :)</li>
+		<li>Es un placer conocerte</li>
+		<li>Creo que tendremos una gran amistad</li>
+	</random>
+</template>
+</category>
+
+<!-- regla 7 -->
+<category>
+<pattern>^ me llamo *</pattern>
+<template>
+	<think><set name="nombre"><star index="2"/></set></think>
+	<get name="nombre"/> es un bonito nombre.
+</template>
+</category>
+
+<!-- regla 8 -->
+<category>
+<pattern>^ llam+ ^</pattern>
+<template>Por telefono?</template>
+</category>
+
+<!-- regla 9 -->
+<category>
+<pattern>^ <bot name="name"/> ^</pattern>
+<template>Dime <get name="nombre"/>, jajajaja :)</template>
+</category>
+
+
+<!-- regla 10 -->
+<category>
+<pattern>Cual es mi nombre</pattern>
+<template>
+	<condition name="nombre">
+		<li value="unknown">Aun no me has dicho tu nombre</li>
+		<li>Tu nombre es <get name="nombre"/></li>
+	</condition>
+</template>
+</category>
+
+<!-- regla 11 -->
+<category>
+<pattern>* mi nombre</pattern>
+<template><srai>CUAL ES MI NOMBRE</srai></template>
+</category>
+
+<!-- regla 12 -->
+<category>
+<pattern>^ como me llamo</pattern>
+<template><srai>CUAL ES MI NOMBRE</srai></template>
+</category>
+
+<!-- regla 13 -->
+<category>
+<pattern>Adios ^</pattern>
+<template>
+	<random>
+		<li>Ha sido un placer ayudarte</li>
+		<li>Espero volver a verte</li>
+		<li>Hasta pronto</li>
+	</random>
+</template>
+</category>
+
+<!-- regla 14 -->
+<category>
+<pattern>^ tu nombre ^</pattern>
+<template>
+	<bot name="name"/> es mi nombre.
+</template>
+</category>
+
+</aiml>
